@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 int main() {
-    system("java -cp bin Main");
+    system("build.bat");
     return 0;
 }
