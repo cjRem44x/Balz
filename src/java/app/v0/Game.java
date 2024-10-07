@@ -8,6 +8,7 @@ public class Game {
         var win = new Window();
         win.size(800, 600);
         win.winbg(0,0,0);
+        win.keyboard( new Keys() );
         win.build("Balz");
     }
 }
