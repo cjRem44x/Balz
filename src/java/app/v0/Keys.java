@@ -24,8 +24,10 @@ implements KeyListener {
             case S -> {
             }
             case A -> {
+                bar.x -= bar.vel;
             }
             case D -> {
+                bar.x += bar.vel;
             } 
             default -> {}
         }
