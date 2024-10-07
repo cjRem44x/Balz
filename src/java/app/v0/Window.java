@@ -56,6 +56,7 @@ extends JPanel {
         f.setDefaultCloseOperation(
             JFrame.EXIT_ON_CLOSE
         );
+        f.setResizable(false);
         f.setVisible(true);
         f.setLocationRelativeTo(null);
     }
