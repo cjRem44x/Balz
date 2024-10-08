@@ -25,7 +25,7 @@ implements KeyListener {
             case D -> {
                 bar.x += bar.vel;
             } 
-            default -> { // NADA }
+            default -> {}
         }
     }
 
