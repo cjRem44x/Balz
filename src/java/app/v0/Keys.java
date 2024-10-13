@@ -19,10 +19,6 @@ implements KeyListener {
         int code = e.getKeyCode();
 
         switch (code) {
-            case W -> {
-            }
-            case S -> {
-            }
             case A -> {
                 bar.x -= bar.vel;
             }
