@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-    system("build.bat");
+    system("java Main");
     return 0;
 }

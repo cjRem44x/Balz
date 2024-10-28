@@ -15,11 +15,12 @@ public class Game {
     public static final int WIDTH = 800, HEIGHT = 600,
                         BAR_WIDTH = 100, BAR_HEIGHT = 20, BAR_SPEED = 90,
                         FPS = 120;
+/***************************************************************/
     public Game() {
         launch();
         loop();
     }
-
+/***************************************************************/
     public void launch() {
         createBalls();
         win = new Window();
@@ -35,7 +36,7 @@ public class Game {
         win.keyboard( new Keys(bar) );
         win.build("Balz");
     }
-
+    /**/
     public void loop() {
         Timer timer = new Timer((int)(1000/FPS), new ActionListener() {
             @Override
@@ -45,36 +46,26 @@ public class Game {
         });
         timer.start();
     }
-
+    /**/
     public void update() {
         barCollision();
         ballCollision();
         moveBalls();
         win.repaint();
     }
-
+/*************************************************************************/
     private void barCollision() {
         if (bar.x >= (WIDTH - BAR_WIDTH)) bar.x = (WIDTH - BAR_WIDTH);
         if (bar.x <= 0) bar.x = 0;
     }
-
+    /**/
     private void ballCollision() {
         for (int i=0; i<this.num_balls; i++) {
             Ball b = this.balls.get(i);
             b.borderCollision(WIDTH, HEIGHT);
         }
     }
-
-    private void moveBalls() {
-        for (int i=0; i<this.num_balls; i++) {
-            Ball b = this.balls.get(i);
-            b.x += b.vx;
-            b.y += b.vy;
-            b.gravitas();
-        }
-    }
-
-
+    /**/
     private void inter() {
         Corner tlbar = new Corner(this.bar.x, this.bar.y),
             trbar = new Corner(this.bar.x+this.bar.width, this.bar.y),
@@ -90,9 +81,16 @@ public class Game {
         }
 
     }
-
-    private record Corner(int x, int y) {}
-
+/*********************************************************************************/
+    private void moveBalls() {
+        for (int i=0; i<this.num_balls; i++) {
+            Ball b = this.balls.get(i);
+            b.x += b.vx;
+            b.y += b.vy;
+            b.gravitas();
+        }
+    }
+    /**/
     private void createBalls() {
         for (int i=0; i<this.num_balls; i++) {
             Ball b = new Ball(this.ball_size, this.ball_size, this.ball_size, this.ball_size);
@@ -100,7 +98,9 @@ public class Game {
             this.balls.add(b);
         }
     }
-
+/***************************************************************/
+    private record Corner(int x, int y) {}
+    /**/
     private int rand(int min, int max) {
         final var RANDOM = new java.util.Random();
         return RANDOM.nextInt((max - min) + 1) + min;

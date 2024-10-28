@@ -5,6 +5,6 @@ set bin=%cd%\bin
 cd %src%
 javac -d %bin% *.java 
 cd %bin%
-java Main
+jar cfve balz.jar Main *.class
 
 pause
