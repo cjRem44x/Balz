@@ -53,7 +53,13 @@ public class Game {
         ballCollision();
         inter();
         moveBalls();
+        ballScores();
         win.repaint();
+    }
+
+    public void ballScores() {
+        for (Ball b: this.balls) {
+        }
     }
 /*************************************************************************/
     private void barCollision() {
@@ -78,12 +84,12 @@ public class Game {
                 b.x, b.y, b.width, b.height
             );
 
-            if ( b_rect.intersects(bar_rect) ) {
+            if ( b_rect.intersects(bar_rect) && b.border_hit ) {
                 b.vx *= -1;
                 b.vy *= -1;
+                b.border_hit = false;
             }
         }
-
     }
 /*********************************************************************************/
     private void moveBalls() {

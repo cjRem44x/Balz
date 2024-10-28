@@ -4,6 +4,7 @@ public class Ball {
     public int x, y, 
         width, height,
         vx, vy, def_speed;
+    public boolean border_hit = false;
 
     public Ball(int x, int y, int width, int height) {
         this.x = x;
@@ -28,20 +29,22 @@ public class Ball {
         if (this.x <= 0) {
             this.vx *= -1;
             this.x = 0;  // Ensure it doesn't go past the border
+            border_hit = true;
             tweakVx();
         } else if (this.x >= (screen_width - this.width)) {
             this.vx *= -1;
             this.x = screen_width - this.width;  // Ensure it stays within bounds
+            border_hit = true;
             tweakVx();
-        }
-    
-        if (this.y <= 0) {
+        } else if (this.y <= 0) {
             this.vy *= -1;
             this.y = 0;  // Ensure it doesn't go past the top border
+            border_hit = true;
             tweakVy();
         } else if (this.y >= (screen_height - this.height)) {
             this.vy *= -1;
             this.y = screen_height - this.height;  // Ensure it stays within bounds
+            border_hit = true;
             tweakVy();
         }
     }
