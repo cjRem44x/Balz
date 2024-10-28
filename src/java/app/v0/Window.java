@@ -29,6 +29,11 @@ extends JPanel {
                     rand(this.bmin, this.bmax)
                 ) );
                 g.fillOval(b.x, b.y, b.width, b.height);
+
+                if ( (b.y+b.height) >= this.getHeight() ) {
+                    g.setColor(Color.red);
+                    g.fillRect(0, this.getHeight()-10, this.getWidth(), 10);
+                }
             }
         }
         if (this.bar != null) {

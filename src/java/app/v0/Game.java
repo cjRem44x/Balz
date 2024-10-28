@@ -4,14 +4,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.Timer;
+import javax.swing.*;
 import app.v0.*;
 
 public class Game {
     private Bar bar;
     private Window win;
     private List<Ball> balls = new ArrayList<>();
-    private int num_balls = 10, ball_size = 50, ball_speed = 5;
+    private int num_balls = 10, ball_size = 50, ball_speed = 5, 
+                score = 0;
+    private JLabel flash_lbl = null, score_lbl = null, shadow = null;
 
     public static final int WIDTH = 800, HEIGHT = 600,
                         BAR_WIDTH = 100, BAR_HEIGHT = 20, BAR_SPEED = 90,
@@ -49,6 +51,7 @@ public class Game {
     }
     /**/
     public void update() {
+        dispScore();
         barCollision();
         ballCollision();
         inter();
@@ -59,7 +62,34 @@ public class Game {
 
     public void ballScores() {
         for (Ball b: this.balls) {
+            if ((b.y+b.height) >= HEIGHT) {
+                this.score++;            
+            }
         }
+    }
+
+    public void dispScore() {
+        if (this.score_lbl != null) win.remove(this.score_lbl);
+        if (this.shadow != null) win.remove(this.shadow);
+
+        this.score_lbl = new JLabel(Integer.toString(this.score));
+        this.score_lbl.setFont( new Font("serif", Font.BOLD, 100) );
+        this.score_lbl.setBounds(
+            WIDTH/2,
+            50,
+            WIDTH/5, WIDTH/5
+        );
+        this.score_lbl.setForeground(Color.magenta);
+        win.add(this.score_lbl);
+        this.shadow = new JLabel(Integer.toString(this.score));
+        this.shadow.setFont( new Font("serif", Font.BOLD, 100) );
+        this.shadow.setBounds(
+            WIDTH/2-5,
+            52,
+            WIDTH/5, WIDTH/5
+        );
+        this.shadow.setForeground(Color.gray);
+        win.add(this.shadow);
     }
 /*************************************************************************/
     private void barCollision() {
