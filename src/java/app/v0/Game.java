@@ -1,5 +1,6 @@
 package app.v0;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class Game {
     public void update() {
         barCollision();
         ballCollision();
+        inter();
         moveBalls();
         win.repaint();
     }
@@ -67,17 +69,19 @@ public class Game {
     }
     /**/
     private void inter() {
-        Corner tlbar = new Corner(this.bar.x, this.bar.y),
-            trbar = new Corner(this.bar.x+this.bar.width, this.bar.y),
-            blbar = new Corner(this.bar.x, this.bar.y+this.bar.height),
-            brbar = new Corner(this.bar.x+this.bar.width, this.bar.y+this.bar.height);
-
-        for (int i=0; i<this.ball_size; i++) {
+        Rectangle bar_rect = new Rectangle(
+            bar.x, bar.y, bar.width, bar.height
+        );
+        for (int i=0; i<this.balls.size(); i++) {
             Ball b = this.balls.get(i);
-            Corner tlb = new Corner(b.x, b.y),
-                trb = new Corner(b.x+b.width, b.y),
-                blb = new Corner(b.x, b.y+b.height),
-                brb = new Corner(b.x+b.width, b.y+b.height);
+            Rectangle b_rect = new Rectangle(
+                b.x, b.y, b.width, b.height
+            );
+
+            if ( b_rect.intersects(bar_rect) ) {
+                b.vx *= -1;
+                b.vy *= -1;
+            }
         }
 
     }
@@ -99,8 +103,6 @@ public class Game {
         }
     }
 /***************************************************************/
-    private record Corner(int x, int y) {}
-    /**/
     private int rand(int min, int max) {
         final var RANDOM = new java.util.Random();
         return RANDOM.nextInt((max - min) + 1) + min;
