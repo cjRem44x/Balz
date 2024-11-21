@@ -11,7 +11,7 @@ public class Game {
     private Bar bar;
     private Window win;
     private List<Ball> balls = new ArrayList<>();
-    private int num_balls = 10, ball_size = 50, ball_speed = 5, 
+    private int num_balls = 3, ball_size = 50, ball_speed = 5, 
                 score = 0;
     private JLabel flash_lbl = null, score_lbl = null, shadow = null;
 
@@ -125,6 +125,7 @@ public class Game {
     private void moveBalls() {
         for (int i=0; i<this.num_balls; i++) {
             Ball b = this.balls.get(i);
+            check_speed(b);
             b.x += b.vx;
             b.y += b.vy;
             b.gravitas();
@@ -136,6 +137,16 @@ public class Game {
             Ball b = new Ball(this.ball_size, this.ball_size, this.ball_size, this.ball_size);
             b.vel(this.ball_speed*rand(-1, 1), this.ball_speed*rand(-1, 1));
             this.balls.add(b);
+        }
+    }
+
+    private void check_speed(Ball b)
+    {
+        // Fix slow ball at start
+        if (b.vy == 0 || b.vx == 0)
+        {
+            b.vy += ball_speed;
+            b.vx -= ball_speed;
         }
     }
 /***************************************************************/
