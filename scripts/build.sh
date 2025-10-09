@@ -19,6 +19,8 @@ mkdir -p "$bin"
 # compile java app
 cd "$java" || exit
 javac24 -d "$bin" \
+    game/engine/*.java \
+    game/*.java \
     *.java
 
 # java source directory
