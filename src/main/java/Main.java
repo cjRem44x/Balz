@@ -1,3 +1,7 @@
+/************************************************************
+ * File:       Main.java
+ * Author(s):  CJ Remillard (cjRem44x on Github)
+ ************************************************************/
 package main.java;
 
 public class Main 
